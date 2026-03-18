@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>פרויקט יוקרתי בלעדי | AC Holding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Didact+Gothic&family=Frank+Ruhl+Libre:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#B8934A;
+  --gold2:#D4AF6E;
+  --gold3:#F0D49A;
+  --black:#060606;
+  --dark:#0E0E0E;
+  --dark2:#141414;
+  --dark3:#1C1C1C;
+  --dark4:#242424;
+  --white:#F8F6F1;
+  --cream:#EDE8DC;
+  --muted:#6A6A6A;
+  --light:#A0A0A0;
+  --border:rgba(184,147,74,0.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--black);color:var(--white);font-family:'Frank Ruhl Libre',serif;font-weight:300;line-height:1.75;overflow-x:hidden}
+
+/* LANG */
+[data-lang="he"] .en{display:none!important}
+[data-lang="en"] .he{display:none!important}
+[data-lang="en"]{direction:ltr;text-align:left}
+[data-lang="en"] nav{flex-direction:row-reverse}
+[data-lang="en"] .hero-text{padding-right:0;padding-left:40px}
+[data-lang="en"] .section-tag::after{margin-right:0;margin-left:auto}
+[data-lang="en"] .about-q{border-right:none;border-left:3px solid var(--gold);padding-right:0;padding-left:22px}
+[data-lang="en"] .wynn-highlight{border-right:none;border-left:3px solid var(--gold);padding-right:0;padding-left:22px}
+
+/* LANG SWITCHER */
+.lang-btn{
+  position:fixed;top:22px;left:24px;z-index:1000;
+  display:flex;align-items:center;gap:0;
+  border:1px solid var(--border);
+  overflow:hidden;
+  font-size:.7rem;letter-spacing:1.5px;
+}
+.lang-opt{
+  padding:8px 14px;cursor:pointer;
+  background:transparent;color:var(--light);
+  font-family:'Didact Gothic',sans-serif;
+  transition:all .25s;border:none;
+  font-size:.7rem;letter-spacing:1.5px;
+}
+.lang-opt.active{background:var(--gold);color:var(--black);font-weight:700}
+.lang-opt:hover:not(.active){color:var(--gold)}
+
+/* NAV */
+nav{
+  position:fixed;top:0;width:100%;z-index:900;
+  padding:20px 64px 20px 120px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to bottom,rgba(6,6,6,.98),rgba(6,6,6,0));
+  backdrop-filter:blur(6px);
+}
+[data-lang="en"] nav{padding:20px 120px 20px 64px}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold2);letter-spacing:4px;text-decoration:none;font-weight:300}
+.nav-cta{
+  border:1px solid var(--gold);color:var(--gold);background:transparent;
+  padding:10px 28px;font-family:'Didact Gothic',sans-serif;
+  font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all .3s;
+}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:600px;overflow:hidden}
+.hero-img{
+  position:absolute;inset:0;
+  background:url('hero.png') center center/cover no-repeat;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(6,6,6,.55) 0%,
+    rgba(6,6,6,.35) 35%,
+    rgba(6,6,6,.75) 70%,
+    rgba(6,6,6,.97) 100%
+  );
+}
+.hero-content{
+  position:relative;z-index:2;
+  height:100%;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:80px 64px 72px;
+  max-width:800px;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:14px;
+  color:var(--gold2);font-family:'Didact Gothic',sans-serif;
+  font-size:.65rem;letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:20px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold)}
+.hero-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,5.5vw,5.5rem);
+  font-weight:400;line-height:1.05;
+  margin-bottom:24px;letter-spacing:-0.5px;
+  color:#ffffff;
+  text-shadow:0 2px 20px rgba(0,0,0,.8);
+}
+.hero-h1 em{color:var(--gold3);font-style:italic}
+.hero-sub{
+  font-size:clamp(.9rem,1.3vw,1.05rem);
+  color:rgba(255,255,255,.88);
+  max-width:480px;line-height:1.8;margin-bottom:8px;
+  font-family:'Didact Gothic',sans-serif;font-weight:300;
+  text-shadow:0 1px 8px rgba(0,0,0,.6);
+}
+.hero-lock{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(184,147,74,.1);border:1px solid rgba(184,147,74,.3);
+  padding:7px 16px;margin-bottom:36px;
+  font-family:'Didact Gothic',sans-serif;font-size:.68rem;letter-spacing:1px;color:var(--gold2);
+}
+.hero-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:36px}
+.price-from{font-family:'Didact Gothic',sans-serif;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.price-val{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold2);font-weight:400;letter-spacing:1px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{
+  background:var(--gold);color:var(--black);border:none;
+  padding:16px 36px;font-family:'Didact Gothic',sans-serif;
+  font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  cursor:pointer;transition:all .35s;text-decoration:none;display:inline-block;
+}
+.btn-primary:hover{background:var(--gold3);transform:translateY(-1px);box-shadow:0 8px 30px rgba(184,147,74,.3)}
+.btn-ghost{
+  background:transparent;border:1px solid rgba(255,255,255,.2);
+  color:var(--white);padding:15px 28px;
+  font-family:'Didact Gothic',sans-serif;font-size:.72rem;letter-spacing:1.5px;
+  cursor:pointer;transition:all .3s;text-decoration:none;
+  display:inline-flex;align-items:center;gap:9px;
+}
+.btn-ghost:hover{border-color:#25D366;color:#25D366}
+.btn-ghost svg{width:17px;height:17px;fill:currentColor;flex-shrink:0}
+
+/* SCROLL INDICATOR */
+.scroll-ind{
+  position:absolute;bottom:32px;right:64px;z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  color:var(--muted);font-family:'Didact Gothic',sans-serif;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;
+}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 2s ease-in-out infinite}
+
+/* STATS BAR */
+.stats-bar{
+  background:var(--dark2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.stat-item{
+  text-align:center;padding:32px 16px;
+  border-right:1px solid var(--border);
+}
+.stat-item:last-child{border-right:none}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--gold2);font-weight:300;line-height:1;margin-bottom:6px}
+.stat-l{font-family:'Didact Gothic',sans-serif;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+
+/* SECTIONS */
+section{padding:100px 64px}
+.section-tag{
+  font-family:'Didact Gothic',sans-serif;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:16px;
+}
+.section-tag::after{content:'';width:40px;height:1px;background:var(--gold)}
+.section-h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,3.5vw,3.4rem);font-weight:300;line-height:1.15;margin-bottom:20px;
+}
+.section-h2 em{color:var(--gold2);font-style:italic}
+
+/* GALLERY */
+.gallery-sec{background:var(--dark);padding:80px 0 0}
+.gallery-header{padding:0 64px 50px}
+.gallery-header p{font-family:'Didact Gothic',sans-serif;font-size:.88rem;color:var(--light);max-width:500px;line-height:1.8}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:1.8fr 1fr 1fr;
+  grid-template-rows:340px 240px;
+  gap:2px;
+}
+.gi{overflow:hidden;cursor:pointer;position:relative}
+.gi:first-child{grid-row:1/3}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.25,.46,.45,.94);display:block}
+.gi:hover img{transform:scale(1.06)}
+.gi-cap{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(6,6,6,.85),transparent);
+  padding:20px 18px 14px;
+  font-family:'Didact Gothic',sans-serif;font-size:.62rem;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(248,246,241,.6);
+  opacity:0;transition:opacity .4s;
+}
+.gi:hover .gi-cap{opacity:1}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:2000;display:none;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain}
+.lb-close{position:absolute;top:24px;right:24px;background:none;border:none;color:var(--gold);font-size:2rem;cursor:pointer;line-height:1}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(184,147,74,.15);border:1px solid var(--border);color:var(--gold);width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;transition:all .3s}
+.lb-nav:hover{background:var(--gold);color:var(--black)}
+.lb-prev{left:20px}
+.lb-next{right:20px}
+
+/* VIDEO */
+.video-sec{background:var(--dark2);padding:100px 64px;text-align:center}
+.video-inner{max-width:900px;margin:0 auto}
+.video-wrap{
+  position:relative;margin:50px auto 0;
+  aspect-ratio:16/9;max-width:900px;
+  border:1px solid var(--border);overflow:hidden;
+  box-shadow:0 0 80px rgba(184,147,74,.08);
+  background:#000;
+}
+/* ▶ להוספת סרטון YouTube: מחק את .video-ph כולו והוסף:
+   <iframe src="https://www.youtube.com/embed/YOUR_ID?rel=0" width="100%" height="100%" frameborder="0" allowfullscreen style="position:absolute;inset:0"></iframe>
+   להוספת סרטון מקומי: <video src="video.mp4" controls style="width:100%;height:100%;object-fit:cover"></video> */
+.video-ph{
+  width:100%;height:100%;
+  background:linear-gradient(135deg,#111 0%,#1a1a1a 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+}
+.play-ring{
+  width:84px;height:84px;border-radius:50%;
+  border:1px solid rgba(184,147,74,.5);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .35s;cursor:pointer;
+}
+.play-ring:hover{border-color:var(--gold);background:rgba(184,147,74,.1);transform:scale(1.08)}
+.play-tri{width:0;height:0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-left:24px solid var(--gold2);margin-right:-6px}
+.video-caption{font-family:'Didact Gothic',sans-serif;font-size:.65rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+
+/* WYNN */
+.wynn-sec{
+  background:var(--black);
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.wynn-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(184,147,74,.07);border:1px solid rgba(184,147,74,.25);
+  padding:10px 18px;margin-bottom:28px;
+  font-family:'Didact Gothic',sans-serif;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
+}
+.wynn-text{font-family:'Didact Gothic',sans-serif;font-size:.88rem;color:var(--light);line-height:1.95;margin-bottom:14px}
+.wynn-highlight{
+  border-right:2px solid var(--gold);padding-right:22px;margin:28px 0;
+  font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--cream);
+  font-style:italic;line-height:1.7;font-weight:300;
+}
+.wynn-facts{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:28px}
+.wf{background:var(--dark2);padding:20px;border-top:1px solid var(--border)}
+.wf-n{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold2);margin-bottom:4px;font-weight:300}
+.wf-l{font-family:'Didact Gothic',sans-serif;font-size:.6rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.wynn-img{height:480px;overflow:hidden;position:relative}
+.wynn-img img{width:100%;height:100%;object-fit:cover}
+.wynn-img-frame{position:absolute;bottom:-12px;right:-12px;width:60%;height:55%;border:1px solid var(--border);pointer-events:none}
+
+/* AMENITIES */
+.amenities-sec{background:var(--dark)}
+.amen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+.amen-card{background:var(--dark3);padding:36px 28px;transition:background .3s;position:relative;overflow:hidden}
+.amen-card::before{content:'';position:absolute;top:0;right:0;width:2px;height:0;background:var(--gold);transition:height .4s}
+.amen-card:hover{background:var(--dark4)}
+.amen-card:hover::before{height:100%}
+.amen-icon{font-size:1.6rem;margin-bottom:16px}
+.amen-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--gold2);margin-bottom:14px;font-weight:400}
+.amen-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.amen-list li{font-family:'Didact Gothic',sans-serif;font-size:.76rem;color:var(--light);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
+.amen-list li::before{content:'—';color:var(--gold);font-size:.55rem;margin-top:5px;flex-shrink:0}
+.amen-bottom{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:2px}
+
+/* UNITS */
+.units-sec{background:var(--dark2)}
+.units-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:50px}
+.unit{
+  background:var(--dark3);padding:28px 24px;
+  border-top:1px solid transparent;transition:all .3s;position:relative;overflow:hidden;
+}
+.unit::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .4s}
+.unit:hover{border-top-color:var(--border);background:var(--dark4)}
+.unit:hover::after{width:100%}
+.unit-type{font-family:'Didact Gothic',sans-serif;font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.unit-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:8px;font-weight:300}
+.unit-count{font-family:'Didact Gothic',sans-serif;font-size:.73rem;color:var(--muted)}
+.unit-badge{position:absolute;top:18px;left:18px;background:rgba(184,147,74,.12);border:1px solid rgba(184,147,74,.3);padding:3px 10px;font-family:'Didact Gothic',sans-serif;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.unit-sky{grid-column:1/3;background:linear-gradient(135deg,rgba(184,147,74,.06) 0%,var(--dark3) 100%);border:1px solid rgba(184,147,74,.15)}
+
+/* ABOUT */
+.about-sec{
+  background:var(--black);
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.about-img-wrap{position:relative;height:560px}
+.about-img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
+.about-frame{
+  position:absolute;bottom:-16px;right:-16px;
+  width:50%;height:50%;
+  border:1px solid var(--border);pointer-events:none;
+}
+.about-text{font-family:'Didact Gothic',sans-serif;font-size:.87rem;color:var(--light);line-height:1.95;margin-bottom:14px}
+.about-q{
+  border-right:2px solid var(--gold);padding-right:22px;margin:26px 0;
+  font-family:'Cormorant Garamond',serif;font-size:1.12rem;color:var(--cream);
+  font-style:italic;line-height:1.7;font-weight:300;
+}
+.about-award{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(184,147,74,.06);border:1px solid var(--border);
+  padding:14px 18px;margin-bottom:10px;
+}
+.award-ico{font-size:1.4rem}
+.award-txt{font-family:'Didact Gothic',sans-serif;font-size:.75rem;color:var(--gold2);line-height:1.5}
+.about-tribute{
+  margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.05);
+  font-family:'Didact Gothic',sans-serif;font-size:.76rem;color:var(--muted);font-style:italic;line-height:1.8;
+}
+.about-btns{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+
+/* FORM */
+.form-sec{background:var(--dark2);padding:100px 64px;position:relative;overflow:hidden}
+.form-sec::before{
+  content:'';position:absolute;top:-300px;right:-300px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(184,147,74,.04) 0%,transparent 65%);
+  pointer-events:none;
+}
+.form-inner{max-width:640px;margin:0 auto;position:relative;z-index:1}
+.form-inner .section-tag{justify-content:center}
+.form-inner .section-tag::after{display:none}
+.form-inner .section-h2{text-align:center;margin-bottom:10px}
+.form-desc{font-family:'Didact Gothic',sans-serif;font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:48px;line-height:1.85}
+.lead-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grp{display:flex;flex-direction:column;gap:7px}
+.form-lbl{font-family:'Didact Gothic',sans-serif;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.form-inp,.form-sel{
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  color:var(--white);padding:14px 18px;
+  font-family:'Didact Gothic',sans-serif;font-size:.85rem;
+  outline:none;transition:border-color .3s;width:100%;
+  -webkit-appearance:none;appearance:none;
+}
+.form-inp:focus,.form-sel:focus{border-color:var(--gold);background:rgba(184,147,74,.04)}
+.form-inp::placeholder{color:rgba(255,255,255,.2)}
+.form-sel option{background:#1a1a1a;color:#fff}
+.form-divider{
+  display:flex;align-items:center;gap:14px;
+  font-family:'Didact Gothic',sans-serif;color:var(--muted);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;
+  margin:4px 0;
+}
+.form-divider::before,.form-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+.form-submit{
+  background:var(--gold);color:var(--black);border:none;padding:19px;
+  font-family:'Didact Gothic',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  cursor:pointer;transition:all .35s;margin-top:4px;width:100%;
+}
+.form-submit:hover{background:var(--gold3);transform:translateY(-1px);box-shadow:0 8px 40px rgba(184,147,74,.3)}
+.form-note{font-family:'Didact Gothic',sans-serif;font-size:.65rem;color:var(--muted);text-align:center;margin-top:12px}
+.form-success{display:none;text-align:center;padding:60px 20px}
+.form-success.show{display:block}
+.success-ico{font-size:3rem;margin-bottom:18px}
+.success-h{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold2);margin-bottom:12px;font-weight:300}
+.success-p{font-family:'Didact Gothic',sans-serif;font-size:.85rem;color:var(--muted);line-height:1.85}
+
+/* FOOTER */
+footer{
+  background:var(--black);border-top:1px solid var(--border);
+  padding:42px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold2);letter-spacing:3px;font-weight:300}
+.footer-links{display:flex;gap:24px;list-style:none}
+.footer-links a{font-family:'Didact Gothic',sans-serif;color:var(--muted);text-decoration:none;font-size:.7rem;letter-spacing:1px;transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-family:'Didact Gothic',sans-serif;font-size:.65rem;color:var(--muted)}
+
+/* FLOAT WA */
+.float-wa{
+  position:fixed;bottom:28px;left:28px;
+  width:54px;height:54px;background:#25D366;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  z-index:880;box-shadow:0 4px 20px rgba(37,211,102,.35);
+  transition:transform .3s;text-decoration:none;
+}
+.float-wa:hover{transform:scale(1.1)}
+.float-wa svg{width:26px;height:26px;fill:#fff}
+
+/* DIVIDER LINE */
+.gold-line{height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:.35}
+
+/* ANIMATIONS */
+@keyframes scrollAnim{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.6);opacity:.3}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  nav{padding:16px 20px 16px 90px}
+  .lang-btn{top:16px;left:16px}
+  .hero-content{padding:0 20px 56px}
+  .hero-h1{font-size:2.4rem}
+  .scroll-ind{display:none}
+
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .stat-item{border-right:none;border-bottom:1px solid var(--border);padding:24px 12px}
+  .stat-item:nth-child(odd){border-right:1px solid var(--border)}
+  .stat-item:last-child,.stat-item:nth-last-child(2):nth-child(odd){border-bottom:none}
+
+  section{padding:60px 20px}
+  .gallery-header{padding:0 20px 36px}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px}
+  .gi:first-child{grid-row:auto;grid-column:1/3}
+
+  .video-sec{padding:60px 20px}
+
+  .wynn-sec{grid-template-columns:1fr;padding:60px 20px;gap:40px}
+  .wynn-img{display:none}
+  .wynn-facts{grid-template-columns:1fr 1fr}
+
+  .amen-grid{grid-template-columns:1fr}
+  .amen-bottom{grid-template-columns:1fr}
+
+  .units-grid{grid-template-columns:1fr 1fr}
+  .unit-sky{grid-column:1/3}
+
+  .about-sec{grid-template-columns:1fr;padding:60px 20px;gap:0}
+  .about-img-wrap{height:340px;margin-bottom:40px}
+  .about-frame{display:none}
+  .about-btns{flex-direction:column}
+
+  .form-sec{padding:60px 20px}
+  .form-row{grid-template-columns:1fr}
+
+  footer{flex-direction:column;text-align:center;padding:32px 20px;gap:14px}
+  .footer-links{flex-wrap:wrap;justify-content:center}
+  .float-wa{bottom:20px;left:20px;width:48px;height:48px}
+}
+@media(max-width:480px){
+  .hero-h1{font-size:2rem}
+  .hero-btns{flex-direction:column}
+  .btn-primary,.btn-ghost{width:100%;justify-content:center;text-align:center}
+  .units-grid{grid-template-columns:1fr}
+  .unit-sky{grid-column:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- LANG SWITCHER -->
+<div class="lang-btn">
+  <button class="lang-opt active" onclick="setLang('he')">עב</button>
+  <button class="lang-opt" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">AC HOLDING</a>
+  <button class="nav-cta" onclick="document.getElementById('lead-form').scrollIntoView({behavior:'smooth'})">
+    <span class="he">לפרטים בלעדיים</span>
+    <span class="en">Exclusive Details</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow he">קו ראשון לים &nbsp;·&nbsp; ראס אל-ח'יימה, UAE</div>
+    <div class="hero-eyebrow en">Beachfront &nbsp;·&nbsp; Ras Al Khaimah, UAE</div>
+    <h1 class="hero-h1 he">לגור על<br><em>קו החוף הראשון</em><br>במזרח התיכון</h1>
+    <h1 class="hero-h1 en">Living on<br><em>The First Beachfront</em><br>in the Middle East</h1>
+    <p class="hero-sub he">פרויקט לייפסטייל יוקרתי — עיצוב Ice Crystal, סמוך לקזינו הראשון ב-UAE</p>
+    <p class="hero-sub en">A luxury lifestyle project — Ice Crystal design, adjacent to the UAE's first casino</p>
+    <div class="hero-lock">
+      <span>🔒</span>
+      <span class="he">שם הפרויקט והקבלן — לנרשמים בלבד</span>
+      <span class="en">Project name & developer — registered clients only</span>
+    </div>
+    <div class="hero-price-row">
+      <span class="price-from he">החל מ—</span>
+      <span class="price-from en">From—</span>
+      <span class="price-val">₪1,300,000</span>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('lead-form').scrollIntoView({behavior:'smooth'})">
+        <span class="he">רוצה לשמוע את כל הפרטים ←</span>
+        <span class="en">Get Full Details →</span>
+      </button>
+      <a class="btn-ghost" onclick="openWA()" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="he">WhatsApp</span>
+        <span class="en">WhatsApp</span>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-ind"><div class="scroll-line"></div><span class="he">גללו</span><span class="en">Scroll</span></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item reveal reveal-d1"><div class="stat-n">608</div><div class="stat-l he">יחידות דיור</div><div class="stat-l en">Residential Units</div></div>
+  <div class="stat-item reveal reveal-d2"><div class="stat-n">88K</div><div class="stat-l he">מ״ר שטח בנוי</div><div class="stat-l en">sqm Built Area</div></div>
+  <div class="stat-item reveal reveal-d3"><div class="stat-n">14</div><div class="stat-l he">קומות מגורים</div><div class="stat-l en">Residential Floors</div></div>
+  <div class="stat-item reveal"><div class="stat-n">1.6K</div><div class="stat-l he">מ׳ מסלול ריצה</div><div class="stat-l en">m Running Track</div></div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-sec">
+  <div class="gallery-header reveal">
+    <div class="section-tag he">הפרויקט</div>
+    <div class="section-tag en">The Project</div>
+    <h2 class="section-h2 he">עיצוב בהשראת <em>קרח ומים</em></h2>
+    <h2 class="section-h2 en">Inspired by <em>Ice & Water</em></h2>
+    <p class="he">חזית הבניין עשויה לוחות זכוכית עם אפקט Ice Crystal — מראה אדריכלי ייחודי שלא ראיתם בישראל.</p>
+    <p class="en">The building facade features special glass panels with an Ice Crystal effect — a unique architectural look unlike anything you've seen.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gi reveal" onclick="openLB(0)"><img src="gallery2.jpg" alt="לובי יוקרתי עם נוף לים"><div class="gi-cap he">לובי | נוף לים ויאכטות</div><div class="gi-cap en">Lobby | Sea & Yacht Views</div></div>
+    <div class="gi reveal reveal-d1" onclick="openLB(1)"><img src="gallery1.jpg" alt="חדר שינה יוקרתי"><div class="gi-cap he">חדר שינה | נוף פנורמי</div><div class="gi-cap en">Bedroom | Panoramic View</div></div>
+    <div class="gi reveal reveal-d2" onclick="openLB(2)"><img src="gallery7.jpg" alt="חוף פרטי"><div class="gi-cap he">חוף פרטי | Beach Club</div><div class="gi-cap en">Private Beach | Beach Club</div></div>
+    <div class="gi reveal reveal-d1" onclick="openLB(3)"><img src="gallery4.jpg" alt="מטבח Ice Crystal"><div class="gi-cap he">מטבח | Ice Crystal Design</div><div class="gi-cap en">Kitchen | Ice Crystal Design</div></div>
+    <div class="gi reveal reveal-d2" onclick="openLB(4)"><img src="gallery3.jpg" alt="דופלקס"><div class="gi-cap he">דופלקס | 7 מטר תקרה</div><div class="gi-cap en">Duplex | 7m Ceiling Height</div></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLB(event)">
+  <button class="lb-close" onclick="closeLB()">✕</button>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1,event)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-nav lb-next" onclick="lbNav(1,event)">›</button>
+</div>
+
+<!-- VIDEO -->
+<section class="video-sec reveal">
+  <div class="video-inner">
+    <div class="section-tag he" style="justify-content:center">סרטון הדמייה</div>
+    <div class="section-tag en" style="justify-content:center">Project Visualization</div>
+    <h2 class="section-h2 he" style="text-align:center">תראו במו עיניכם</h2>
+    <h2 class="section-h2 en" style="text-align:center">See It for Yourself</h2>
+    <p class="he" style="text-align:center;font-family:'Didact Gothic',sans-serif;font-size:.85rem;color:var(--muted);margin-top:-8px">סרטון הדמייה מקצועי של הפרויקט</p>
+    <p class="en" style="text-align:center;font-family:'Didact Gothic',sans-serif;font-size:.85rem;color:var(--muted);margin-top:-8px">Professional project visualization video</p>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/5xNa9C0KD54?rel=0" width="100%" height="100%" frameborder="0" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:none"></iframe>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- WYNN -->
+<section class="wynn-sec reveal">
+  <div>
+    <div class="section-tag he">מיקום אסטרטגי</div>
+    <div class="section-tag en">Strategic Location</div>
+    <h2 class="section-h2 he">סמוך לקזינו<br><em>הראשון במזרח התיכון</em></h2>
+    <h2 class="section-h2 en">Adjacent to the<br><em>Middle East's First Casino</em></h2>
+    <div class="wynn-badge">🎰 Wynn Al Marjan Island · <span class="he">פתיחה 2027</span><span class="en">Opening 2027</span></div>
+    <p class="wynn-text he"><strong style="color:var(--white)">Wynn Al Marjan Island</strong> — קזינו ראשון ב-UAE ובמזרח התיכון כולו — נפתח ב-2027 בדיוק סמוך לפרויקט. השקעה של $5.1 מיליארד שצפויה לשנות את פני האזור לתמיד.</p>
+    <p class="wynn-text en"><strong style="color:var(--white)">Wynn Al Marjan Island</strong> — the UAE's first casino and the entire Middle East — opens in 2027 right next to the project. A $5.1 billion investment that will transform this region permanently.</p>
+    <p class="wynn-text he">ראס אל-ח'יימה עומדת לפני מהפכה תיירותית. מי שנכנס עכשיו — נכנס לפני כולם.</p>
+    <p class="wynn-text en">Ras Al Khaimah is on the verge of a tourism revolution. Those who enter now — enter before everyone else.</p>
+    <div class="wynn-highlight he">"מי שרכש נכס בדובאי לפני שנת 2000 — היום הוא מיליונר. מי שרוכש ב-RAK היום, לפני הקזינו — עומד בנקודה זהה."</div>
+    <div class="wynn-highlight en">"Those who bought in Dubai before 2000 are millionaires today. Those buying in RAK now, before the casino opens, stand at the same point."</div>
+    <div class="wynn-facts">
+      <div class="wf"><div class="wf-n">$5.1B</div><div class="wf-l he">השקעה ב-Wynn</div><div class="wf-l en">Wynn Investment</div></div>
+      <div class="wf"><div class="wf-n">1,542</div><div class="wf-l he">חדרי מלון</div><div class="wf-l en">Hotel Rooms</div></div>
+      <div class="wf"><div class="wf-n">22</div><div class="wf-l he">מסעדות ובארים</div><div class="wf-l en">Restaurants & Bars</div></div>
+      <div class="wf"><div class="wf-n">#1</div><div class="wf-l he">קזינו ב-UAE</div><div class="wf-l en">Casino in UAE</div></div>
+    </div>
+  </div>
+  <div class="wynn-img">
+    <img src="gallery7.jpg" alt="Marjan Beach RAK">
+    <div class="wynn-img-frame"></div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities-sec">
+  <div class="reveal">
+    <div class="section-tag he">מתקנים</div>
+    <div class="section-tag en">Amenities</div>
+    <h2 class="section-h2 he">חיים כמו ב-Resort — <em>כל יום</em></h2>
+    <h2 class="section-h2 en">Resort Living — <em>Every Day</em></h2>
+  </div>
+  <div class="amen-grid">
+    <div class="amen-card reveal">
+      <div class="amen-icon">💧</div>
+      <div class="amen-title he">מים ובריאות</div>
+      <div class="amen-title en">Water & Wellness</div>
+      <ul class="amen-list">
+        <li><span class="he">בריכת Infinity קו ראשון לים</span><span class="en">Infinity Pool — Beachfront</span></li>
+        <li><span class="he">אזור Wellness ורוגע</span><span class="en">Wellness & Relaxation Zone</span></li>
+        <li><span class="he">Water Sound Therapy</span><span class="en">Water Sound Therapy</span></li>
+        <li><span class="he">ג'קוזי והידרותרפיה</span><span class="en">Jacuzzi & Hydrotherapy</span></li>
+        <li><span class="he">מזרקת Antarctic ice crystal</span><span class="en">Antarctic Ice Crystal Fountain</span></li>
+        <li><span class="he">Rain Experience</span><span class="en">Rain Experience Showers</span></li>
+      </ul>
+    </div>
+    <div class="amen-card reveal reveal-d1">
+      <div class="amen-icon">🏋️</div>
+      <div class="amen-title he">ספורט ופנאי</div>
+      <div class="amen-title en">Sport & Leisure</div>
+      <ul class="amen-list">
+        <li><span class="he">מרכז כושר מתקדם</span><span class="en">State-of-the-Art Gym</span></li>
+        <li><span class="he">מסלול ריצה 1.6 ק"מ על הגג</span><span class="en">1.6km Rooftop Running Track</span></li>
+        <li><span class="he">Ice Rink Experience</span><span class="en">Ice Rink Experience</span></li>
+        <li><span class="he">מיטות שיזוף וקבאנות</span><span class="en">Sun Beds & Cabanas</span></li>
+        <li><span class="he">פלטפורמות צפות למנוחה</span><span class="en">Floating Rest Platforms</span></li>
+        <li><span class="he">אזור משחקים לילדים</span><span class="en">Children's Play Area</span></li>
+      </ul>
+    </div>
+    <div class="amen-card reveal reveal-d2">
+      <div class="amen-icon">🌆</div>
+      <div class="amen-title he">Rooftop יוקרתי</div>
+      <div class="amen-title en">Luxury Rooftop</div>
+      <ul class="amen-list">
+        <li><span class="he">Observation Deck 360°</span><span class="en">360° Observation Deck</span></li>
+        <li><span class="he">קולנוע חוץ</span><span class="en">Outdoor Cinema</span></li>
+        <li><span class="he">Sky Lounge בלעדי</span><span class="en">Exclusive Sky Lounge</span></li>
+        <li><span class="he">בר על הגג</span><span class="en">Rooftop Bar</span></li>
+        <li><span class="he">Sky Bridge Infinity Pool</span><span class="en">Sky Bridge Infinity Pool</span></li>
+        <li><span class="he">בית קפה עם מפל מים</span><span class="en">Café with Water Cascade</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="amen-bottom">
+    <div class="amen-card reveal">
+      <div class="amen-icon">🛎️</div>
+      <div class="amen-title he">שירות VIP</div>
+      <div class="amen-title en">VIP Services</div>
+      <ul class="amen-list">
+        <li><span class="he">קיר אקווריום בלובי</span><span class="en">Aquarium Wall in Lobby</span></li>
+        <li><span class="he">VIP Concierge</span><span class="en">VIP Concierge</span></li>
+        <li><span class="he">22 יחידות מסחר</span><span class="en">22 Retail Units</span></li>
+        <li><span class="he">795 מקומות חניה</span><span class="en">795 Parking Spaces</span></li>
+      </ul>
+    </div>
+    <div class="amen-card reveal reveal-d1">
+      <div class="amen-icon">🏗️</div>
+      <div class="amen-title he">נתוני הפרויקט</div>
+      <div class="amen-title en">Project Specs</div>
+      <ul class="amen-list">
+        <li><span class="he">שטח מגרש 13,425 מ"ר</span><span class="en">13,425 sqm Plot Area</span></li>
+        <li><span class="he">88,262 מ"ר שטח בנוי</span><span class="en">88,262 sqm Built Area</span></li>
+        <li><span class="he">לובי גובה 7 מטר</span><span class="en">7m Lobby Height</span></li>
+        <li><span class="he">תקרות 3.4 מטר בדירות</span><span class="en">3.4m Apartment Ceilings</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- UNITS -->
+<section class="units-sec">
+  <div class="reveal">
+    <div class="section-tag he">סוגי הדירות</div>
+    <div class="section-tag en">Unit Types</div>
+    <h2 class="section-h2 he">מ-Mini ועד <em>Sky Villa</em></h2>
+    <h2 class="section-h2 en">From Mini to <em>Sky Villa</em></h2>
+    <p style="font-family:'Didact Gothic',sans-serif;font-size:.85rem;color:var(--muted)" class="he">608 יחידות — אפשרות למשקיע בכל רמה</p>
+    <p style="font-family:'Didact Gothic',sans-serif;font-size:.85rem;color:var(--muted)" class="en">608 units — an option for every level of investor</p>
+  </div>
+  <div class="units-grid">
+    <div class="unit reveal"><div class="unit-type he">1 חדר שינה</div><div class="unit-type en">1 Bedroom</div><div class="unit-name">Mini</div><div class="unit-count he">337 יחידות</div><div class="unit-count en">337 Units</div></div>
+    <div class="unit reveal reveal-d1"><div class="unit-type he">1 חדר שינה</div><div class="unit-type en">1 Bedroom</div><div class="unit-name">Standard</div><div class="unit-count he">146 יחידות</div><div class="unit-count en">146 Units</div></div>
+    <div class="unit reveal reveal-d2"><div class="unit-type he">1 חדר שינה</div><div class="unit-type en">1 Bedroom</div><div class="unit-name">Luxury</div><div class="unit-count he">30 יחידות</div><div class="unit-count en">30 Units</div></div>
+    <div class="unit reveal"><div class="unit-type he">דופלקס</div><div class="unit-type en">Duplex</div><div class="unit-name">Mini Duplex</div><div class="unit-count he">10 יחידות · תקרה 7מ'</div><div class="unit-count en">10 Units · 7m Ceiling</div></div>
+    <div class="unit reveal reveal-d1"><div class="unit-type he">2 חדרי שינה</div><div class="unit-type en">2 Bedrooms</div><div class="unit-name">Standard + Duplex</div><div class="unit-count he">55 יחידות</div><div class="unit-count en">55 Units</div></div>
+    <div class="unit reveal reveal-d2"><div class="unit-type he">3 חדרי שינה</div><div class="unit-type en">3 Bedrooms</div><div class="unit-name">Standard</div><div class="unit-count he">24 יחידות</div><div class="unit-count en">24 Units</div></div>
+    <div class="unit unit-sky reveal">
+      <div class="unit-badge he">יוקרה בלעדית</div>
+      <div class="unit-badge en">Exclusive Luxury</div>
+      <div class="unit-type" style="margin-top:10px">Sky Villa</div>
+      <div class="unit-name" style="color:var(--gold2)">3BR Sky Villa</div>
+      <div class="unit-count he">6 יחידות בלבד · פנטהאוז שמיימי עם נוף בלתי מוגבל</div>
+      <div class="unit-count en">6 Units only · Sky penthouse with unlimited ocean views</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec">
+  <div class="about-img-wrap reveal">
+    <img class="about-img" src="avital.png" alt="אביטל כהן — AC Holding">
+    <div class="about-frame"></div>
+  </div>
+  <div class="about-content reveal reveal-d1">
+    <div class="section-tag he">AC Holding</div>
+    <div class="section-tag en">AC Holding</div>
+    <h2 class="section-h2 he">אביטל כהן —<br><em>מובילה בנדל"ן דובאי</em></h2>
+    <h2 class="section-h2 en">Avital Cohen —<br><em>Dubai Real Estate Leader</em></h2>
+    <p class="about-text he">AC Holding היא חברת נדל"ן מהמובילות בדובאי, בבעלותה של אביטל כהן — אשת עסקים בעלת מוניטין, עם גישה ישירה ליזמים הבכירים ביותר בשוק.</p>
+    <p class="about-text en">AC Holding is one of Dubai's leading real estate companies, owned by Avital Cohen — a renowned businesswoman with direct access to the market's top developers.</p>
+    <div class="about-q he">"אני לא רק מלווה משקיעים — אני עצמי משקיעה. כל פרויקט עובר בדיקה אישית שלי, ורק כשאני מאמינה באמת בפוטנציאל — אני פותחת את הדלת."</div>
+    <div class="about-q en">"I don't just guide investors — I invest myself. Every project undergoes my personal review, and only when I truly believe in its potential do I open the door."</div>
+    <div class="about-award"><div class="award-ico">🏆</div><div class="award-txt he">זוכת פרס <strong>משפיענית המוטיבציה של השנה</strong></div><div class="award-txt en">Winner — <strong>Motivational Influencer of the Year Award</strong></div></div>
+    <div class="about-award"><div class="award-ico">🛡️</div><div class="award-txt he">כספי ההשקעה בחשבון <strong>Escrow בפיקוח ממשלת דובאי</strong></div><div class="award-txt en">Investment funds in <strong>Escrow under Dubai Government supervision</strong></div></div>
+    <div class="about-tribute he">10% מהרווחים נתרמים למשפחות שכולות — לעילוי נשמתו של רס"ר אוריאל כהן ז"ל, שנפל בקרב ברצועת עזה, דצמבר 2023.</div>
+    <div class="about-tribute en">10% of profits are donated to bereaved families — in memory of Staff Sgt. Uriel Cohen z"l, who fell in combat in Gaza, December 2023.</div>
+    <div class="about-btns">
+      <button class="btn-primary" onclick="document.getElementById('lead-form').scrollIntoView({behavior:'smooth'})">
+        <span class="he">קבל פרטים מלאים</span><span class="en">Get Full Details</span>
+      </button>
+      <a class="btn-ghost" onclick="openWA()" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- FORM -->
+<section class="form-sec" id="lead-form">
+  <div class="form-inner">
+    <div class="section-tag he" style="justify-content:center">השאירו פרטים</div>
+    <div class="section-tag en" style="justify-content:center">Leave Your Details</div>
+    <h2 class="section-h2 he" style="text-align:center">רוצים לשמוע יותר?</h2>
+    <h2 class="section-h2 en" style="text-align:center">Want to Know More?</h2>
+    <p class="form-desc he">השאירו פרטים ואביטל תחזור אליכם עם מידע מלא — כולל שם הקבלן, מחירון ותנאי תשלום.</p>
+    <p class="form-desc en">Leave your details and Avital will get back to you with full information — including developer name, pricing and payment terms.</p>
+    <div class="lead-form" id="leadForm">
+      <div class="form-row">
+        <div class="form-grp">
+          <label class="form-lbl he">שם מלא *</label>
+          <label class="form-lbl en">Full Name *</label>
+          <input class="form-inp" type="text" id="fname" placeholder="" required>
+        </div>
+        <div class="form-grp">
+          <label class="form-lbl he">טלפון *</label>
+          <label class="form-lbl en">Phone *</label>
+          <input class="form-inp" type="tel" id="fphone" placeholder="+972 / +1..." required>
+        </div>
+      </div>
+      <div class="form-grp">
+        <label class="form-lbl he">אימייל</label>
+        <label class="form-lbl en">Email</label>
+        <input class="form-inp" type="email" id="femail" placeholder="your@email.com">
+      </div>
+      <div class="form-divider"><span class="he">שאלות סינון</span><span class="en">Qualifying Questions</span></div>
+      <div class="form-row">
+        <div class="form-grp">
+          <label class="form-lbl he">מה טווח התקציב שלך?</label>
+          <label class="form-lbl en">What is your budget range?</label>
+          <select class="form-sel" id="fbudget">
+            <option value="">— <span class="he">בחר</span><span class="en">Select</span> —</option>
+            <option class="he" value="עד ₪1.5M">עד ₪1.5 מיליון</option>
+            <option class="he" value="₪1.5M–₪2.5M">₪1.5M – ₪2.5M</option>
+            <option class="he" value="₪2.5M–₪4M">₪2.5M – ₪4M</option>
+            <option class="he" value="מעל ₪4M">מעל ₪4 מיליון</option>
+            <option class="en" value="Up to ₪1.5M">Up to ₪1.5M</option>
+            <option class="en" value="₪1.5M–₪2.5M">₪1.5M – ₪2.5M</option>
+            <option class="en" value="₪2.5M–₪4M">₪2.5M – ₪4M</option>
+            <option class="en" value="Above ₪4M">Above ₪4M</option>
+          </select>
+        </div>
+        <div class="form-grp">
+          <label class="form-lbl he">מימון / הון עצמי?</label>
+          <label class="form-lbl en">Financing / Equity?</label>
+          <select class="form-sel" id="ffinance">
+            <option value="">— <span class="he">בחר</span> —</option>
+            <option class="he" value="הון עצמי מלא">הון עצמי מלא</option>
+            <option class="he" value="הון עצמי חלקי">הון עצמי חלקי + מימון</option>
+            <option class="he" value="בתהליך מימון">בתהליך מימון</option>
+            <option class="he" value="רוצה לשמוע אפשרויות">רוצה לשמוע אפשרויות</option>
+            <option class="en" value="Full equity">Full equity</option>
+            <option class="en" value="Partial equity + financing">Partial equity + financing</option>
+            <option class="en" value="In financing process">In financing process</option>
+            <option class="en" value="Want to explore options">Want to explore options</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grp">
+        <label class="form-lbl he">הערות נוספות</label>
+        <label class="form-lbl en">Additional Notes</label>
+        <input class="form-inp" type="text" id="fnotes" placeholder="">
+      </div>
+      <button class="form-submit" onclick="submitForm()">
+        <span class="he">שלח ← קבל את כל הפרטים</span>
+        <span class="en">Submit → Get Full Details</span>
+      </button>
+      <p class="form-note">🔒 <span class="he">הפרטים שלכם שמורים ולא יועברו לצד שלישי</span><span class="en">Your details are secure and will not be shared</span></p>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <div class="success-ico">✅</div>
+      <div class="success-h he">קיבלנו! תודה</div>
+      <div class="success-h en">Received! Thank you</div>
+      <p class="success-p he">אביטל תחזור אליכם בהקדם עם כל הפרטים המלאים.<br>בינתיים מוזמנים לשלוח הודעה ב-WhatsApp.</p>
+      <p class="success-p en">Avital will get back to you shortly with full details.<br>Feel free to reach out on WhatsApp in the meantime.</p>
+      <a class="btn-ghost" style="margin:28px auto 0;display:inline-flex" onclick="openWA()" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AC HOLDING</div>
+  <ul class="footer-links">
+    <li><a href="https://acholding.co" target="_blank">acholding.co</a></li>
+    <li><a href="https://acholding.co/about/" target="_blank"><span class="he">מי אנחנו</span><span class="en">About</span></a></li>
+    <li><a href="https://acholding.co/projects/" target="_blank"><span class="he">פרויקטים</span><span class="en">Projects</span></a></li>
+  </ul>
+  <div class="footer-copy">© 2025 AC Holding</div>
+</footer>
+
+<!-- FLOAT WA -->
+<a class="float-wa" onclick="openWA()" href="javascript:void(0)">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// WHATSAPP - פותח עם הודעה מובנית
+function openWA(){
+  const lang = document.documentElement.getAttribute('data-lang');
+  const msg = lang === 'he'
+    ? 'היי אביטל, ראיתי את הפרויקט היוקרתי בראס אל-ח׳יימה ואשמח לשמוע עוד פרטים 🏙️'
+    : 'Hi Avital, I saw the luxury project in Ras Al Khaimah and would love to hear more details 🏙️';
+  window.open('https://wa.me/972507346906?text=' + encodeURIComponent(msg), '_blank');
+}
+
+// LANG
+function setLang(l){
+  document.documentElement.setAttribute('data-lang',l);
+  document.documentElement.setAttribute('lang',l);
+  document.documentElement.setAttribute('dir',l==='en'?'ltr':'rtl');
+  document.querySelectorAll('.lang-opt').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===l||(l==='he'&&b.textContent.trim()==='עב')));
+}
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+// LIGHTBOX
+const lbImgs=['gallery2.jpg','gallery1.jpg','gallery7.jpg','gallery4.jpg','gallery3.jpg'];
+let lbIdx=0;
+function openLB(i){lbIdx=i;document.getElementById('lb-img').src=lbImgs[i];document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden'}
+function closeLB(e){if(!e||e.target.id==='lightbox'||e.currentTarget.classList.contains('lb-close')){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''}}
+function lbNav(d,e){e&&e.stopPropagation();lbIdx=(lbIdx+d+lbImgs.length)%lbImgs.length;document.getElementById('lb-img').src=lbImgs[lbIdx]}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')lbNav(-1,null);if(e.key==='ArrowRight')lbNav(1,null)});
+
+// FORM
+function submitForm(){
+  const name=document.getElementById('fname').value.trim();
+  const phone=document.getElementById('fphone').value.trim();
+  const email=document.getElementById('femail').value.trim();
+  const budget=document.getElementById('fbudget').value;
+  const finance=document.getElementById('ffinance').value;
+  const notes=document.getElementById('fnotes').value.trim();
+  const lang=document.documentElement.getAttribute('data-lang');
+
+  if(!name||!phone){
+    alert(lang==='he'?'נא למלא שם וטלפון':'Please fill in name and phone');
+    return;
+  }
+
+  // WhatsApp message — נראה כמו הלקוח כותב
+  let msg = lang==='he'
+    ? `היי, רציתי לשמוע יותר פרטים על הפרויקט 🏙️\n\nזה המידע שאתם צריכים לדעת עליי:\n\n👤 שם: ${name}\n📱 טלפון: ${phone}`
+    : `Hi, I'd like to hear more details about the project 🏙️\n\nHere's the information you need to know about me:\n\n👤 Name: ${name}\n📱 Phone: ${phone}`;
+
+  if(email) msg += `\n📧 ${lang==='he'?'אימייל':'Email'}: ${email}`;
+  if(budget) msg += `\n💰 ${lang==='he'?'תקציב':'Budget'}: ${budget}`;
+  if(finance) msg += `\n🏦 ${lang==='he'?'מימון':'Financing'}: ${finance}`;
+  if(notes) msg += `\n📝 ${lang==='he'?'הערות':'Notes'}: ${notes}`;
+
+  window.open('https://wa.me/972507346906?text='+encodeURIComponent(msg),'_blank');
+
+  document.getElementById('leadForm').style.display='none';
+  document.getElementById('formSuccess').classList.add('show');
+  setTimeout(()=>document.getElementById('formSuccess').scrollIntoView({behavior:'smooth',block:'center'}),100);
+}
+document.querySelectorAll('.form-inp,.form-sel').forEach(el=>{
+  el.addEventListener('keydown',e=>{if(e.key==='Enter')submitForm()})
+});
+</script>
+</body>
+</html>
